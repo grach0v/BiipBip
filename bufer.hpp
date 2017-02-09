@@ -1,4 +1,6 @@
-//#include <ctype.h>
+#if !defined BUFER
+#define BUFER
+
 #include <iostream>
 #include <stdio.h>
 #include <assert.h>
@@ -70,4 +72,4 @@ void Bufer <T, Size> :: dump ()
     std :: cout << "\n" << "head = " << head << "\n" << "tail = " << tail << "\n" << "rSize = " << realSize << "\n" ;
 }
 
-
+#endif
