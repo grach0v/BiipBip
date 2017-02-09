@@ -57,9 +57,4 @@ void MSymbol :: play ()
     for (size_t i = 0; i < length_; i++) Beep (750, 500* (1 + code_ [i]));
 }
 
-int main ()
-{
-    return 0;
-}
-
 # endif

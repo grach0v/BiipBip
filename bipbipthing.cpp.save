@@ -1,9 +1,13 @@
+#if !defined BEEP_BEEP_MF
+# define BEEP_BEEP_MF
+
 #include <Windows.h>
 #include <cstring>
+#include "exception.hpp"
 
 class MSymbol
 {
-    char symbol_;
+    //char symbol_;
     size_t length_;
     bool* code_;
 
@@ -13,14 +17,14 @@ class MSymbol
 
 
     public:
-    MSymbol (char symbol, char* code);
+    MSymbol (/*char symbol,*/ char* code);
     ~MSymbol ();
     void play();
 
 };
 
-MSymbol :: MSymbol (char symbol, char* code):
-    symbol_ (symbol),
+MSymbol :: MSymbol (/*char symbol,*/ char* code):
+    //symbol_ (symbol),
     length_ (strlen (code)),
     code_ (new bool [length_])
 {
@@ -37,7 +41,7 @@ MSymbol :: MSymbol (char symbol, char* code):
                 break;
 
             default:
-                Beep (750, 10000); //will fix sooner
+                throw myException ("wrong code for a letter") 
         }
     }
 }
@@ -48,15 +52,14 @@ MSymbol :: ~MSymbol ()
     code_ = nullptr;
 }
 
-void MSymbol :: play ();
+void MSymbol :: play ()
 {
-    for (size_t i = 0; i < length_; i++)
+    for (size_t i = 0; i < length_; i++) Beep (750, 500* (1 + code_ [i]));
 }
 
 int main ()
 {
-    Beep(750, 3000);
-    Beep(750, 3000);
-
     return 0;
 }
+
+# endif
